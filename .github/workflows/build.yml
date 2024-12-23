@@ -1,0 +1,37 @@
+name: CI - Tests and Lint
+
+on:
+  pull_request:
+    branches:
+      - main      # Trigger only on pull requests targeting the 'main' branch
+      - develop   # Add other branches if needed
+
+jobs:
+  build:
+    name: Run Tests and Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set Up Node.js (or Python, Ruby, etc., based on your project)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # Specify Node.js version
+
+      # Step 3: Install Dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Linting
+      - name: Run linter
+        run: npm run lint
+
+      # Step 5: Run Tests
+      - name: Run tests
+        run: npm test
+
+
